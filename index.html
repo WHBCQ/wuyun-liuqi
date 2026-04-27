@@ -4,7 +4,280 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>五运六气 · 节气养生</title>
-    <link rel="stylesheet" href="css/style.css">
+    <style>
+:root {
+    --primary: #2d5016;
+    --primary-light: #4a7c2e;
+    --accent: #c4a35a;
+    --bg: #f8f5f0;
+    --card-bg: #fff;
+    --text: #333;
+    --text-light: #666;
+    --border: #e0d8cc;
+    --warning: #b85450;
+    --warning-bg: #fdf2f2;
+    --advice: #4a7c2e;
+    --advice-bg: #f0f7eb;
+    --lifestyle: #5a7a9a;
+    --lifestyle-bg: #eef3f8;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    line-height: 1.6;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 720px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+header {
+    text-align: center;
+    padding: 40px 0 30px;
+}
+
+header h1 {
+    font-size: 2rem;
+    color: var(--primary);
+    margin-bottom: 8px;
+    letter-spacing: 2px;
+}
+
+.subtitle {
+    color: var(--text-light);
+    font-size: 0.95rem;
+}
+
+.input-section {
+    background: var(--card-bg);
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+    margin-bottom: 20px;
+}
+
+.input-section h2 {
+    font-size: 1.2rem;
+    color: var(--primary);
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+.form-group {
+    margin-bottom: 18px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-size: 0.9rem;
+    color: var(--text);
+    font-weight: 500;
+}
+
+.form-group input,
+.form-group select {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    font-size: 1rem;
+    background: #fafafa;
+    transition: border-color 0.2s;
+}
+
+.form-group input:focus,
+.form-group select:focus {
+    outline: none;
+    border-color: var(--primary-light);
+}
+
+.radio-group {
+    display: flex;
+    gap: 20px;
+}
+
+.radio-group label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    font-weight: normal;
+}
+
+.radio-group input[type="radio"] {
+    width: auto;
+    cursor: pointer;
+}
+
+.btn-primary {
+    width: 100%;
+    padding: 14px;
+    background: var(--primary);
+    color: #fff;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s;
+    margin-top: 10px;
+}
+
+.btn-primary:hover {
+    background: var(--primary-light);
+}
+
+.result-section {
+    animation: fadeIn 0.5s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+.result-card {
+    background: var(--card-bg);
+    border-radius: 16px;
+    padding: 30px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+
+.result-card h2 {
+    font-size: 1.3rem;
+    color: var(--primary);
+    text-align: center;
+    margin-bottom: 8px;
+}
+
+.current-time {
+    text-align: center;
+    color: var(--text-light);
+    font-size: 0.85rem;
+    margin-bottom: 20px;
+}
+
+.section-divider {
+    height: 1px;
+    background: var(--border);
+    margin: 24px 0;
+}
+
+.info-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.info-item h3,
+.info-full h3 {
+    font-size: 0.95rem;
+    color: var(--primary);
+    margin-bottom: 10px;
+    padding-bottom: 6px;
+    border-bottom: 2px solid var(--accent);
+    display: inline-block;
+}
+
+.info-content {
+    font-size: 0.9rem;
+    color: var(--text);
+    line-height: 1.8;
+}
+
+.info-content .tag {
+    display: inline-block;
+    background: var(--bg);
+    padding: 2px 10px;
+    border-radius: 12px;
+    font-size: 0.8rem;
+    margin: 2px 4px 2px 0;
+    color: var(--text-light);
+}
+
+.warning-box,
+.advice-box,
+.lifestyle-box {
+    margin-top: 20px;
+    padding: 20px;
+    border-radius: 12px;
+}
+
+.warning-box {
+    background: var(--warning-bg);
+    border-left: 4px solid var(--warning);
+}
+
+.advice-box {
+    background: var(--advice-bg);
+    border-left: 4px solid var(--advice);
+}
+
+.lifestyle-box {
+    background: var(--lifestyle-bg);
+    border-left: 4px solid var(--lifestyle);
+}
+
+.warning-box h3,
+.advice-box h3,
+.lifestyle-box h3 {
+    font-size: 1rem;
+    margin-bottom: 12px;
+}
+
+.warning-box h3 { color: var(--warning); }
+.advice-box h3 { color: var(--advice); }
+.lifestyle-box h3 { color: var(--lifestyle); }
+
+.warning-box ul,
+.advice-box ul,
+.lifestyle-box ul {
+    margin-left: 18px;
+    font-size: 0.9rem;
+    line-height: 2;
+}
+
+.warning-box li,
+.advice-box li,
+.lifestyle-box li {
+    margin-bottom: 4px;
+}
+
+footer {
+    text-align: center;
+    padding: 30px 0;
+    font-size: 0.8rem;
+    color: var(--text-light);
+}
+
+@media (max-width: 600px) {
+    .info-grid {
+        grid-template-columns: 1fr;
+    }
+    header h1 {
+        font-size: 1.5rem;
+    }
+    .container {
+        padding: 12px;
+    }
+    .input-section,
+    .result-card {
+        padding: 20px;
+    }
+}
+    </style>
 </head>
 <body>
     <div class="container">
@@ -108,9 +381,784 @@
         </footer>
     </div>
 
-    <script src="js/lunar.js"></script>
-    <script src="js/wuyun.js"></script>
-    <script src="js/advice.js"></script>
-    <script src="js/main.js"></script>
+    <script>
+const Lunar = {
+    gan: ['甲','乙','丙','丁','戊','己','庚','辛','壬','癸'],
+    zhi: ['子','丑','寅','卯','辰','巳','午','未','申','酉','戌','亥'],
+    solarTerms: [
+        '立春','雨水','惊蛰','春分','清明','谷雨',
+        '立夏','小满','芒种','夏至','小暑','大暑',
+        '立秋','处暑','白露','秋分','寒露','霜降',
+        '立冬','小雪','大雪','冬至','小寒','大寒'
+    ],
+    
+    getYearGanZhi: function(year, month, day) {
+        const liChunMonth = 2;
+        const liChunDay = 4;
+        
+        let effectiveYear = year;
+        if (month < liChunMonth || (month === liChunMonth && day < liChunDay)) {
+            effectiveYear = year - 1;
+        }
+        
+        const baseYear = 1984;
+        const offset = effectiveYear - baseYear;
+        const ganIndex = ((offset % 10) + 10) % 10;
+        const zhiIndex = ((offset % 12) + 12) % 12;
+        
+        return {
+            gan: this.gan[ganIndex],
+            zhi: this.zhi[zhiIndex],
+            ganZhi: this.gan[ganIndex] + this.zhi[zhiIndex],
+            ganIndex: ganIndex,
+            zhiIndex: zhiIndex,
+            year: effectiveYear
+        };
+    },
+    
+    getCurrentSolarTerm: function(date) {
+        const year = date.getFullYear();
+        const month = date.getMonth() + 1;
+        const day = date.getDate();
+        
+        const termApprox = [
+            {name:'立春', month:2, day:4}, {name:'雨水', month:2, day:19},
+            {name:'惊蛰', month:3, day:6}, {name:'春分', month:3, day:21},
+            {name:'清明', month:4, day:5}, {name:'谷雨', month:4, day:20},
+            {name:'立夏', month:5, day:6}, {name:'小满', month:5, day:21},
+            {name:'芒种', month:6, day:6}, {name:'夏至', month:6, day:21},
+            {name:'小暑', month:7, day:7}, {name:'大暑', month:7, day:23},
+            {name:'立秋', month:8, day:8}, {name:'处暑', month:8, day:23},
+            {name:'白露', month:9, day:8}, {name:'秋分', month:9, day:23},
+            {name:'寒露', month:10, day:8}, {name:'霜降', month:10, day:23},
+            {name:'立冬', month:11, day:7}, {name:'小雪', month:11, day:22},
+            {name:'大雪', month:12, day:7}, {name:'冬至', month:12, day:22},
+            {name:'小寒', month:1, day:6}, {name:'大寒', month:1, day:20}
+        ];
+        
+        let currentTerm = null;
+        let nextTerm = null;
+        let termIndex = 0;
+        
+        for (let i = 0; i < termApprox.length; i++) {
+            const term = termApprox[i];
+            const next = termApprox[(i + 1) % 24];
+            
+            const termDate = new Date(year, term.month - 1, term.day);
+            let nextDate = new Date(year, next.month - 1, next.day);
+            if (next.month < term.month) {
+                nextDate = new Date(year + 1, next.month - 1, next.day);
+            }
+            
+            const currentDate = new Date(year, month - 1, day);
+            
+            if (currentDate >= termDate && currentDate < nextDate) {
+                currentTerm = term;
+                nextTerm = next;
+                termIndex = i;
+                break;
+            }
+        }
+        
+        if (!currentTerm) {
+            const firstTerm = termApprox[0];
+            const lastTerm = termApprox[23];
+            const lastDate = new Date(year - 1, lastTerm.month - 1, lastTerm.day);
+            const firstDate = new Date(year, firstTerm.month - 1, firstTerm.day);
+            const currentDate = new Date(year, month - 1, day);
+            
+            if (currentDate >= lastDate && currentDate < firstDate) {
+                currentTerm = lastTerm;
+                nextTerm = firstTerm;
+                termIndex = 23;
+            }
+        }
+        
+        return {
+            current: currentTerm,
+            next: nextTerm,
+            index: termIndex
+        };
+    },
+    
+    getFullGanZhi: function(year, month, day, hour) {
+        const yearGZ = this.getYearGanZhi(year, month, day);
+        
+        const yearGanIndex = yearGZ.ganIndex;
+        let monthGanStart;
+        if (yearGanIndex === 0 || yearGanIndex === 5) monthGanStart = 2;
+        else if (yearGanIndex === 1 || yearGanIndex === 6) monthGanStart = 4;
+        else if (yearGanIndex === 2 || yearGanIndex === 7) monthGanStart = 6;
+        else if (yearGanIndex === 3 || yearGanIndex === 8) monthGanStart = 8;
+        else monthGanStart = 0;
+        
+        const lunarMonth = ((month - 2 + 12) % 12);
+        const monthGanIndex = (monthGanStart + lunarMonth) % 10;
+        const monthZhiIndex = (2 + lunarMonth) % 12;
+        
+        const baseDate = new Date(1900, 0, 31);
+        const targetDate = new Date(year, month - 1, day);
+        const diffDays = Math.floor((targetDate - baseDate) / (1000 * 60 * 60 * 24));
+        const dayGanIndex = (diffDays % 10 + 10) % 10;
+        const dayZhiIndex = (diffDays % 12 + 12) % 12;
+        
+        let hourZhiIndex = 0;
+        if (hour !== null && hour !== undefined && hour !== '') {
+            hourZhiIndex = Math.floor((parseInt(hour) + 1) % 12);
+        }
+        const hourGanStart = (dayGanIndex % 5) * 2;
+        const hourGanIndex = (hourGanStart + hourZhiIndex) % 10;
+        
+        return {
+            year: yearGZ,
+            month: {
+                gan: this.gan[monthGanIndex],
+                zhi: this.zhi[monthZhiIndex],
+                ganZhi: this.gan[monthGanIndex] + this.zhi[monthZhiIndex],
+                ganIndex: monthGanIndex,
+                zhiIndex: monthZhiIndex
+            },
+            day: {
+                gan: this.gan[dayGanIndex],
+                zhi: this.zhi[dayZhiIndex],
+                ganZhi: this.gan[dayGanIndex] + this.zhi[dayZhiIndex],
+                ganIndex: dayGanIndex,
+                zhiIndex: dayZhiIndex
+            },
+            hour: hour !== null && hour !== undefined && hour !== '' ? {
+                gan: this.gan[hourGanIndex],
+                zhi: this.zhi[hourZhiIndex],
+                ganZhi: this.gan[hourGanIndex] + this.zhi[hourZhiIndex],
+                ganIndex: hourGanIndex,
+                zhiIndex: hourZhiIndex
+            } : null
+        };
+    }
+};
+    </script>
+
+    <script>
+const WuYunLiuQi = {
+    wuYunMap: {
+        '甲': { element: '土', type: '太过' },
+        '己': { element: '土', type: '不及' },
+        '乙': { element: '金', type: '不及' },
+        '庚': { element: '金', type: '太过' },
+        '丙': { element: '水', type: '太过' },
+        '辛': { element: '水', type: '不及' },
+        '丁': { element: '木', type: '不及' },
+        '壬': { element: '木', type: '太过' },
+        '戊': { element: '火', type: '太过' },
+        '癸': { element: '火', type: '不及' }
+    },
+    
+    siTianMap: {
+        '子': { qi: '少阴君火', nature: '热' },
+        '午': { qi: '少阴君火', nature: '热' },
+        '丑': { qi: '太阴湿土', nature: '湿' },
+        '未': { qi: '太阴湿土', nature: '湿' },
+        '寅': { qi: '少阳相火', nature: '暑' },
+        '申': { qi: '少阳相火', nature: '暑' },
+        '卯': { qi: '阳明燥金', nature: '燥' },
+        '酉': { qi: '阳明燥金', nature: '燥' },
+        '辰': { qi: '太阳寒水', nature: '寒' },
+        '戌': { qi: '太阳寒水', nature: '寒' },
+        '巳': { qi: '厥阴风木', nature: '风' },
+        '亥': { qi: '厥阴风木', nature: '风' }
+    },
+    
+    zaiQuanMap: {
+        '厥阴风木': '少阳相火',
+        '少阴君火': '阳明燥金',
+        '太阴湿土': '太阳寒水',
+        '少阳相火': '厥阴风木',
+        '阳明燥金': '少阴君火',
+        '太阳寒水': '太阴湿土'
+    },
+    
+    zhuQi: [
+        { step: 1, name: '厥阴风木', nature: '风', organ: '肝' },
+        { step: 2, name: '少阴君火', nature: '热', organ: '心' },
+        { step: 3, name: '少阳相火', nature: '暑', organ: '三焦' },
+        { step: 4, name: '太阴湿土', nature: '湿', organ: '脾' },
+        { step: 5, name: '阳明燥金', nature: '燥', organ: '肺' },
+        { step: 6, name: '太阳寒水', nature: '寒', organ: '肾' }
+    ],
+    
+    keQiOrder: ['厥阴风木', '少阴君火', '太阴湿土', '少阳相火', '阳明燥金', '太阳寒水'],
+    
+    organElements: {
+        '肝': '木', '胆': '木',
+        '心': '火', '小肠': '火',
+        '脾': '土', '胃': '土',
+        '肺': '金', '大肠': '金',
+        '肾': '水', '膀胱': '水',
+        '三焦': '火'
+    },
+    
+    shengKe: {
+        '木': { sheng: '火', ke: '土', beiKe: '金' },
+        '火': { sheng: '土', ke: '金', beiKe: '水' },
+        '土': { sheng: '金', ke: '水', beiKe: '木' },
+        '金': { sheng: '水', ke: '木', beiKe: '火' },
+        '水': { sheng: '木', ke: '火', beiKe: '土' }
+    },
+    
+    calcWuYun: function(gan) {
+        return this.wuYunMap[gan] || null;
+    },
+    
+    calcSiTianZaiQuan: function(zhi) {
+        const siTian = this.siTianMap[zhi];
+        if (!siTian) return null;
+        
+        const zaiQuan = this.zaiQuanMap[siTian.qi];
+        return {
+            siTian: siTian.qi,
+            siTianNature: siTian.nature,
+            zaiQuan: zaiQuan,
+            zaiQuanNature: this.getQiNature(zaiQuan)
+        };
+    },
+    
+    getQiNature: function(qiName) {
+        const map = {
+            '厥阴风木': '风',
+            '少阴君火': '热',
+            '太阴湿土': '湿',
+            '少阳相火': '暑',
+            '阳明燥金': '燥',
+            '太阳寒水': '寒'
+        };
+        return map[qiName] || '';
+    },
+    
+    calcKeQi: function(siTianName) {
+        const order = this.keQiOrder;
+        const siTianIndex = order.indexOf(siTianName);
+        if (siTianIndex === -1) return null;
+        
+        const keQi = [];
+        for (let i = 0; i < 6; i++) {
+            const idx = (siTianIndex - 2 + i + 6) % 6;
+            keQi.push({
+                step: i + 1,
+                name: order[idx],
+                nature: this.getQiNature(order[idx])
+            });
+        }
+        
+        return keQi;
+    },
+    
+    getCurrentQi: function(solarTermIndex, siTianName) {
+        const qiStep = Math.floor(solarTermIndex / 4) + 1;
+        const zhuQi = this.zhuQi[qiStep - 1];
+        
+        const keQiList = this.calcKeQi(siTianName);
+        const keQi = keQiList ? keQiList[qiStep - 1] : null;
+        
+        return {
+            step: qiStep,
+            zhuQi: zhuQi,
+            keQi: keQi
+        };
+    },
+    
+    analyzeKeZhu: function(zhuQi, keQi) {
+        if (!zhuQi || !keQi) return null;
+        
+        const zhuElement = this.organElements[zhuQi.organ];
+        const keElement = this.organElements[this.getOrganByQi(keQi.name)];
+        
+        let relation = '平气';
+        let tendency = '平和';
+        
+        if (zhuQi.nature === keQi.nature) {
+            relation = '同气';
+            tendency = zhuQi.nature === '风' || zhuQi.nature === '暑' || zhuQi.nature === '热' ? '偏热' : 
+                       zhuQi.nature === '寒' ? '偏寒' : '偏湿';
+        } else {
+            const sk = this.shengKe[zhuElement];
+            if (sk) {
+                if (sk.ke === keElement) {
+                    relation = '主胜客（逆）';
+                    tendency = '气机内郁';
+                } else if (sk.beiKe === keElement) {
+                    relation = '客胜主（顺）';
+                    tendency = '外邪易入';
+                } else if (sk.sheng === keElement) {
+                    relation = '主生客';
+                    tendency = '正气外散';
+                } else {
+                    relation = '客生主';
+                    tendency = '得天之助';
+                }
+            }
+        }
+        
+        return {
+            relation: relation,
+            tendency: tendency,
+            zhuElement: zhuElement,
+            keElement: keElement
+        };
+    },
+    
+    getOrganByQi: function(qiName) {
+        const map = {
+            '厥阴风木': '肝',
+            '少阴君火': '心',
+            '太阴湿土': '脾',
+            '少阳相火': '三焦',
+            '阳明燥金': '肺',
+            '太阳寒水': '肾'
+        };
+        return map[qiName] || '';
+    },
+    
+    analyzeConstitution: function(yearGan) {
+        const wuYun = this.calcWuYun(yearGan);
+        if (!wuYun) return null;
+        
+        const element = wuYun.element;
+        const type = wuYun.type;
+        
+        const constitutionMap = {
+            '木': {
+                organ: '肝',
+                tendency: type === '太过' ? '肝气偏旺，易亢逆' : '肝血偏弱，易郁结',
+                weak: type === '太过' ? '脾' : '肺',
+                strong: '肝'
+            },
+            '火': {
+                organ: '心',
+                tendency: type === '太过' ? '心火偏旺，易烦躁' : '心阳偏弱，易畏寒',
+                weak: type === '太过' ? '肾' : '心',
+                strong: '心'
+            },
+            '土': {
+                organ: '脾',
+                tendency: type === '太过' ? '脾湿偏盛，易困重' : '脾气偏弱，易消化不良',
+                weak: type === '太过' ? '肾' : '肝',
+                strong: '脾'
+            },
+            '金': {
+                organ: '肺',
+                tendency: type === '太过' ? '肺气偏燥，易干咳' : '肺气偏弱，易感冒',
+                weak: type === '太过' ? '肝' : '脾',
+                strong: '肺'
+            },
+            '水': {
+                organ: '肾',
+                tendency: type === '太过' ? '肾水偏寒，易畏寒' : '肾气偏弱，易腰酸',
+                weak: type === '太过' ? '心' : '肾',
+                strong: '肾'
+            }
+        };
+        
+        return {
+            wuYun: wuYun,
+            constitution: constitutionMap[element]
+        };
+    }
+};
+    </script>
+
+    <script>
+const Advice = {
+    generate: function(birthGZ, currentYearGZ, qiInfo, keZhuAnalysis) {
+        return {
+            constitution: this.getConstitutionDesc(birthGZ),
+            yearEnv: this.getYearEnvDesc(currentYearGZ),
+            solarTerm: this.getSolarTermDesc(qiInfo),
+            warnings: this.getWarnings(birthGZ, currentYearGZ, qiInfo, keZhuAnalysis),
+            notices: this.getNotices(birthGZ, currentYearGZ, qiInfo, keZhuAnalysis),
+            lifestyle: this.getLifestyle(birthGZ, currentYearGZ, qiInfo, keZhuAnalysis)
+        };
+    },
+    
+    getConstitutionDesc: function(birthGZ) {
+        const wuYun = WuYunLiuQi.calcWuYun(birthGZ.year.gan);
+        const constitution = WuYunLiuQi.analyzeConstitution(birthGZ.year.gan);
+        
+        if (!constitution) return '';
+        
+        const c = constitution.constitution;
+        return `
+            <span class="tag">${birthGZ.year.ganZhi}年</span>
+            <span class="tag">${wuYun.element}运${wuYun.type}</span>
+            <br><br>
+            <strong>先天体质特点：</strong>${c.tendency}<br>
+            <strong>相对偏弱：</strong>${c.weak}脏<br>
+            <strong>相对偏强：</strong>${c.strong}脏
+        `;
+    },
+    
+    getYearEnvDesc: function(currentYearGZ) {
+        const stzq = WuYunLiuQi.calcSiTianZaiQuan(currentYearGZ.year.zhi);
+        const wuYun = WuYunLiuQi.calcWuYun(currentYearGZ.year.gan);
+        
+        if (!stzq) return '';
+        
+        return `
+            <span class="tag">${currentYearGZ.year.ganZhi}年</span>
+            <span class="tag">${wuYun.element}运${wuYun.type}</span>
+            <span class="tag">${stzq.siTian}司天</span>
+            <span class="tag">${stzq.zaiQuan}在泉</span>
+            <br><br>
+            <strong>全年气候特点：</strong>上半年偏${stzq.siTianNature}，下半年偏${stzq.zaiQuanNature}，
+            全年${wuYun.element}气${wuYun.type === '太过' ? '偏盛' : '偏弱'}。
+        `;
+    },
+    
+    getSolarTermDesc: function(qiInfo) {
+        if (!qiInfo || !qiInfo.zhuQi || !qiInfo.keQi) return '';
+        
+        return `
+            <strong>当前主气：</strong>第${qiInfo.step}步 · ${qiInfo.zhuQi.name}（${qiInfo.zhuQi.nature}）<br>
+            <strong>当前客气：</strong>${qiInfo.keQi.name}（${qiInfo.keQi.nature}）<br>
+            <strong>对应脏腑：</strong>${qiInfo.zhuQi.organ}、${WuYunLiuQi.getOrganByQi(qiInfo.keQi.name)}
+        `;
+    },
+    
+    getWarnings: function(birthGZ, currentYearGZ, qiInfo, keZhuAnalysis) {
+        const warnings = [];
+        
+        const constitution = WuYunLiuQi.analyzeConstitution(birthGZ.year.gan);
+        const stzq = WuYunLiuQi.calcSiTianZaiQuan(currentYearGZ.year.zhi);
+        
+        if (!constitution || !stzq || !qiInfo) return warnings;
+        
+        const c = constitution.constitution;
+        const zhuQi = qiInfo.zhuQi;
+        const keQi = qiInfo.keQi;
+        
+        const weakOrgan = c.weak;
+        const keOrgan = WuYunLiuQi.getOrganByQi(keQi.name);
+        
+        if (keOrgan === weakOrgan) {
+            warnings.push(`<strong>${weakOrgan}气本弱</strong>，逢${keQi.name}客气当令，${weakOrgan}系统负担加重`);
+        }
+        
+        if (keZhuAnalysis) {
+            if (keZhuAnalysis.tendency === '外邪易入') {
+                warnings.push(`<strong>客胜主（顺）</strong>：外邪容易侵袭${zhuQi.organ}，出现${this.getOrganSymptoms(zhuQi.organ)}`);
+            } else if (keZhuAnalysis.tendency === '气机内郁') {
+                warnings.push(`<strong>主胜客（逆）</strong>：气机郁滞于内，${zhuQi.organ}功能不畅，可能出现${this.getOrganSymptoms(zhuQi.organ)}`);
+            }
+        }
+        
+        const siTianNature = stzq.siTianNature;
+        const constitutionElement = c.strong;
+        
+        if (siTianNature === '寒' && constitutionElement === '心') {
+            warnings.push(`<strong>寒水司天 + 心阳偏弱</strong>：心寒相交，易出现心悸、畏寒、四肢不温`);
+        }
+        if (siTianNature === '热' && constitutionElement === '肾') {
+            warnings.push(`<strong>火热司天 + 肾气偏弱</strong>：火灼肾阴，易出现口干、失眠、腰酸`);
+        }
+        
+        if (zhuQi.nature === '湿') {
+            warnings.push(`<strong>湿土当令</strong>：湿气困脾，易出现腹胀、食欲减退、肢体困重`);
+        }
+        if (zhuQi.nature === '燥') {
+            warnings.push(`<strong>燥金当令</strong>：燥邪伤肺，易出现咽干、干咳、皮肤干燥`);
+        }
+        if (zhuQi.nature === '风') {
+            warnings.push(`<strong>风木当令</strong>：风性善行数变，易出现头痛、眩晕、肢体麻木`);
+        }
+        if (zhuQi.nature === '寒') {
+            warnings.push(`<strong>寒水当令</strong>：寒邪伤阳，易出现关节痛、腹痛、畏寒`);
+        }
+        
+        const wuYun = WuYunLiuQi.calcWuYun(currentYearGZ.year.gan);
+        if (wuYun) {
+            if (wuYun.element === '火' && siTianNature === '寒') {
+                warnings.push(`<strong>火运 + 寒水司天</strong>：寒热相搏，心脑血管负担加重`);
+            }
+            if (wuYun.element === '水' && siTianNature === '热') {
+                warnings.push(`<strong>水运 + 火热司天</strong>：水火不济，易出现心烦失眠、上热下寒`);
+            }
+        }
+        
+        return warnings;
+    },
+    
+    getNotices: function(birthGZ, currentYearGZ, qiInfo, keZhuAnalysis) {
+        const notices = [];
+        
+        const constitution = WuYunLiuQi.analyzeConstitution(birthGZ.year.gan);
+        const stzq = WuYunLiuQi.calcSiTianZaiQuan(currentYearGZ.year.zhi);
+        
+        if (!constitution || !stzq || !qiInfo) return notices;
+        
+        const c = constitution.constitution;
+        const zhuQi = qiInfo.zhuQi;
+        
+        if (c.organ === '肝') {
+            notices.push('情绪管理尤为重要，避免暴怒或长期抑郁');
+            notices.push('春季和风大天气减少外出，戴帽子避风');
+        }
+        if (c.organ === '心') {
+            notices.push('避免熬夜，23点前入睡最宜');
+            notices.push('情绪激动时做深呼吸，防止心火亢盛');
+        }
+        if (c.organ === '脾') {
+            notices.push('饮食定时定量，避免暴饮暴食');
+            notices.push('生冷瓜果节制，尤其冰箱取出需回温');
+        }
+        if (c.organ === '肺') {
+            notices.push('雾霾天减少户外运动，出门戴口罩');
+            notices.push('秋季干燥时多饮温水，保持室内湿度');
+        }
+        if (c.organ === '肾') {
+            notices.push('腰部保暖，避免久坐和过度劳累');
+            notices.push('节制房事，冬季尤宜养藏');
+        }
+        
+        if (zhuQi.nature === '湿') {
+            notices.push('居室保持干燥通风，梅雨季节可用除湿机');
+            notices.push('饮食宜清淡，少食油腻甜腻之物');
+        }
+        if (zhuQi.nature === '燥') {
+            notices.push('多饮温水，可食用银耳、百合、梨等润燥');
+            notices.push('皮肤涂抹保湿品，避免过度洗浴');
+        }
+        if (zhuQi.nature === '风') {
+            notices.push('注意防风，尤其是头颈部');
+            notices.push('运动后及时擦汗，避免当风受凉');
+        }
+        if (zhuQi.nature === '寒') {
+            notices.push('添衣保暖，重点保护腰腹和脚踝');
+            notices.push('饮食宜温热，可适当食用生姜、羊肉');
+        }
+        if (zhuQi.nature === '暑') {
+            notices.push('避免正午外出，注意防暑降温');
+            notices.push('汗出多时要补充淡盐水，忌狂饮冰水');
+        }
+        if (zhuQi.nature === '热') {
+            notices.push('保持心情平静，避免情绪过激');
+            notices.push('饮食清淡，可适当食用绿豆、苦瓜');
+        }
+        
+        if (stzq.siTianNature === '湿') {
+            notices.push('全年湿气偏重，脾胃功能弱的人尤其注意');
+        }
+        if (stzq.siTianNature === '寒') {
+            notices.push('全年寒气偏重，心肾阳虚者注意保暖养阳');
+        }
+        
+        return notices;
+    },
+    
+    getLifestyle: function(birthGZ, currentYearGZ, qiInfo, keZhuAnalysis) {
+        const lifestyle = [];
+        
+        const constitution = WuYunLiuQi.analyzeConstitution(birthGZ.year.gan);
+        const stzq = WuYunLiuQi.calcSiTianZaiQuan(currentYearGZ.year.zhi);
+        
+        if (!constitution || !stzq || !qiInfo) return lifestyle;
+        
+        const c = constitution.constitution;
+        const zhuQi = qiInfo.zhuQi;
+        
+        lifestyle.push('作息规律，早睡早起，顺应自然阴阳消长');
+        lifestyle.push('适度运动，以微微出汗为度，避免大汗伤阳');
+        
+        if (c.organ === '肝') {
+            lifestyle.push('宜柔和运动：太极拳、八段锦、散步');
+            lifestyle.push('睡前可泡脚，配合按揉太冲穴');
+            lifestyle.push('居室宜保持通风，色调以青绿为宜');
+        }
+        if (c.organ === '心') {
+            lifestyle.push('午休15-30分钟，养心静神');
+            lifestyle.push('睡前避免剧烈运动和刺激性内容');
+            lifestyle.push('可练习静坐或冥想，每日10-15分钟');
+        }
+        if (c.organ === '脾') {
+            lifestyle.push('饭后散步15分钟，助脾运化');
+            lifestyle.push('晨起可摩腹100次，顺时针方向');
+            lifestyle.push('避免久坐，每小时起身活动5分钟');
+        }
+        if (c.organ === '肺') {
+            lifestyle.push('晨起深呼吸练习，扩胸运动');
+            lifestyle.push('居室保持空气流通，避免烟尘');
+            lifestyle.push('秋季可练"呬"字诀（六字诀）');
+        }
+        if (c.organ === '肾') {
+            lifestyle.push('冬季早卧晚起，必待日光');
+            lifestyle.push('可练习踮脚尖、搓腰眼');
+            lifestyle.push('避免熬夜和过度劳累，保护精气');
+        }
+        
+        if (zhuQi.nature === '湿') {
+            lifestyle.push('居所除湿，衣物被褥勤晾晒');
+            lifestyle.push('运动以汗出热退为度，忌汗出当风');
+        }
+        if (zhuQi.nature === '燥') {
+            lifestyle.push('室内可使用加湿器，保持40-60%湿度');
+            lifestyle.push('晨起喝杯温水，睡前涂润唇膏');
+        }
+        if (zhuQi.nature === '风') {
+            lifestyle.push('外出戴帽子围巾，避风邪侵袭');
+            lifestyle.push('运动出汗后及时擦干，更换干衣');
+        }
+        if (zhuQi.nature === '寒') {
+            lifestyle.push('早睡晚起，等待日出后再起床活动');
+            lifestyle.push('可多晒太阳，尤其是背部');
+        }
+        if (zhuQi.nature === '暑') {
+            lifestyle.push('午间小憩，避开烈日');
+            lifestyle.push('运动后补充淡盐水或绿豆汤');
+        }
+        
+        lifestyle.push(`<strong>饮食建议：</strong>${this.getDietAdvice(c, zhuQi, stzq)}`);
+        
+        return lifestyle;
+    },
+    
+    getDietAdvice: function(constitution, zhuQi, stzq) {
+        let advice = '';
+        
+        if (constitution.organ === '肝') {
+            advice += '宜食绿色蔬菜、枸杞、山楂；';
+        }
+        if (constitution.organ === '心') {
+            advice += '宜食红色食物如红枣、红豆、西红柿；';
+        }
+        if (constitution.organ === '脾') {
+            advice += '宜食黄色食物如小米、南瓜、山药；';
+        }
+        if (constitution.organ === '肺') {
+            advice += '宜食白色食物如百合、银耳、梨；';
+        }
+        if (constitution.organ === '肾') {
+            advice += '宜食黑色食物如黑豆、黑芝麻、核桃；';
+        }
+        
+        if (zhuQi.nature === '湿') {
+            advice += '当前湿重，可加薏米、赤小豆、茯苓祛湿；';
+        }
+        if (zhuQi.nature === '燥') {
+            advice += '当前偏燥，宜多饮水，食蜂蜜、雪梨润燥；';
+        }
+        if (zhuQi.nature === '寒') {
+            advice += '当前偏寒，宜食生姜、羊肉、桂圆温阳；';
+        }
+        if (zhuQi.nature === '暑') {
+            advice += '当前偏热，宜食绿豆、西瓜、苦瓜清热；';
+        }
+        
+        return advice;
+    },
+    
+    getOrganSymptoms: function(organ) {
+        const symptoms = {
+            '肝': '头痛、眩晕、胁痛、情绪不畅',
+            '心': '心悸、失眠、口舌生疮、烦躁',
+            '脾': '腹胀、食欲差、便溏、乏力',
+            '肺': '咳嗽、咽干、气短、鼻塞',
+            '肾': '腰酸、耳鸣、畏寒、水肿',
+            '三焦': '胸闷、寒热往来、水道不利'
+        };
+        return symptoms[organ] || '相关不适';
+    }
+};
+    </script>
+
+    <script>
+document.addEventListener('DOMContentLoaded', function() {
+    const birthForm = document.getElementById('birthForm');
+    const resultSection = document.getElementById('resultSection');
+    
+    birthForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const year = parseInt(document.getElementById('birthYear').value);
+        const month = parseInt(document.getElementById('birthMonth').value);
+        const day = parseInt(document.getElementById('birthDay').value);
+        const hour = document.getElementById('birthHour').value;
+        
+        if (!year || !month || !day) {
+            alert('请填写完整的出生日期');
+            return;
+        }
+        
+        // 计算出生干支
+        const birthGZ = Lunar.getFullGanZhi(year, month, day, hour);
+        
+        // 获取当前时间
+        const now = new Date();
+        const currentYearGZ = Lunar.getYearGanZhi(now.getFullYear(), now.getMonth() + 1, now.getDate());
+        const currentGZ = Lunar.getFullGanZhi(now.getFullYear(), now.getMonth() + 1, now.getDate(), '');
+        
+        // 获取当前节气
+        const solarTerm = Lunar.getCurrentSolarTerm(now);
+        
+        // 计算司天在泉
+        const stzq = WuYunLiuQi.calcSiTianZaiQuan(currentGZ.year.zhi);
+        
+        // 计算当前主气客气
+        let qiInfo = null;
+        if (stzq && solarTerm) {
+            qiInfo = WuYunLiuQi.getCurrentQi(solarTerm.index, stzq.siTian);
+        }
+        
+        // 客主加临分析
+        let keZhuAnalysis = null;
+        if (qiInfo && qiInfo.zhuQi && qiInfo.keQi) {
+            keZhuAnalysis = WuYunLiuQi.analyzeKeZhu(qiInfo.zhuQi, qiInfo.keQi);
+        }
+        
+        // 生成建议
+        const advice = Advice.generate(birthGZ, currentGZ, qiInfo, keZhuAnalysis);
+        
+        // 显示结果
+        displayResults(advice, now, solarTerm);
+        
+        // 滚动到结果
+        resultSection.style.display = 'block';
+        resultSection.scrollIntoView({ behavior: 'smooth' });
+    });
+    
+    function displayResults(advice, now, solarTerm) {
+        // 当前时间
+        const timeStr = now.getFullYear() + '年' + (now.getMonth() + 1) + '月' + now.getDate() + '日';
+        let termStr = '';
+        if (solarTerm && solarTerm.current) {
+            termStr = ' · 当前节气：' + solarTerm.current.name;
+        }
+        document.getElementById('currentTime').textContent = timeStr + termStr;
+        
+        // 先天体质
+        document.getElementById('constitutionInfo').innerHTML = advice.constitution;
+        
+        // 今年大环境
+        document.getElementById('yearEnvInfo').innerHTML = advice.yearEnv;
+        
+        // 当下节气
+        document.getElementById('solarTermInfo').innerHTML = advice.solarTerm;
+        
+        // 可能出现的不适
+        const warningHtml = advice.warnings.length > 0 
+            ? '<ul>' + advice.warnings.map(w => '<li>' + w + '</li>').join('') + '</ul>'
+            : '<p>当前运气平和，暂无特殊预警</p>';
+        document.getElementById('warningInfo').innerHTML = warningHtml;
+        
+        // 注意事项
+        const noticeHtml = advice.notices.length > 0
+            ? '<ul>' + advice.notices.map(n => '<li>' + n + '</li>').join('') + '</ul>'
+            : '<p>常规养生即可</p>';
+        document.getElementById('noticeInfo').innerHTML = noticeHtml;
+        
+        // 起居建议
+        const lifestyleHtml = advice.lifestyle.length > 0
+            ? '<ul>' + advice.lifestyle.map(l => '<li>' + l + '</li>').join('') + '</ul>'
+            : '<p>保持规律作息</p>';
+        document.getElementById('lifestyleInfo').innerHTML = lifestyleHtml;
+    }
+});
+    </script>
 </body>
 </html>
