@@ -86,7 +86,7 @@ const Advice = {
         }
         
         const siTianNature = stzq.siTianNature;
-        const constitutionElement = c.constitution.strong;
+        const constitutionElement = c.strong;
         
         if (siTianNature === '寒' && constitutionElement === '心') {
             warnings.push(`<strong>寒水司天 + 心阳偏弱</strong>：心寒相交，易出现心悸、畏寒、四肢不温`);
@@ -132,23 +132,23 @@ const Advice = {
         const c = constitution.constitution;
         const zhuQi = qiInfo.zhuQi;
         
-        if (c.constitution.organ === '肝') {
+        if (c.organ === '肝') {
             notices.push('情绪管理尤为重要，避免暴怒或长期抑郁');
             notices.push('春季和风大天气减少外出，戴帽子避风');
         }
-        if (c.constitution.organ === '心') {
+        if (c.organ === '心') {
             notices.push('避免熬夜，23点前入睡最宜');
             notices.push('情绪激动时做深呼吸，防止心火亢盛');
         }
-        if (c.constitution.organ === '脾') {
+        if (c.organ === '脾') {
             notices.push('饮食定时定量，避免暴饮暴食');
             notices.push('生冷瓜果节制，尤其冰箱取出需回温');
         }
-        if (c.constitution.organ === '肺') {
+        if (c.organ === '肺') {
             notices.push('雾霾天减少户外运动，出门戴口罩');
             notices.push('秋季干燥时多饮温水，保持室内湿度');
         }
-        if (c.constitution.organ === '肾') {
+        if (c.organ === '肾') {
             notices.push('腰部保暖，避免久坐和过度劳累');
             notices.push('节制房事，冬季尤宜养藏');
         }
@@ -202,27 +202,27 @@ const Advice = {
         lifestyle.push('作息规律，早睡早起，顺应自然阴阳消长');
         lifestyle.push('适度运动，以微微出汗为度，避免大汗伤阳');
         
-        if (c.constitution.organ === '肝') {
+        if (c.organ === '肝') {
             lifestyle.push('宜柔和运动：太极拳、八段锦、散步');
             lifestyle.push('睡前可泡脚，配合按揉太冲穴');
             lifestyle.push('居室宜保持通风，色调以青绿为宜');
         }
-        if (c.constitution.organ === '心') {
+        if (c.organ === '心') {
             lifestyle.push('午休15-30分钟，养心静神');
             lifestyle.push('睡前避免剧烈运动和刺激性内容');
             lifestyle.push('可练习静坐或冥想，每日10-15分钟');
         }
-        if (c.constitution.organ === '脾') {
+        if (c.organ === '脾') {
             lifestyle.push('饭后散步15分钟，助脾运化');
             lifestyle.push('晨起可摩腹100次，顺时针方向');
             lifestyle.push('避免久坐，每小时起身活动5分钟');
         }
-        if (c.constitution.organ === '肺') {
+        if (c.organ === '肺') {
             lifestyle.push('晨起深呼吸练习，扩胸运动');
             lifestyle.push('居室保持空气流通，避免烟尘');
             lifestyle.push('秋季可练"呬"字诀（六字诀）');
         }
-        if (c.constitution.organ === '肾') {
+        if (c.organ === '肾') {
             lifestyle.push('冬季早卧晚起，必待日光');
             lifestyle.push('可练习踮脚尖、搓腰眼');
             lifestyle.push('避免熬夜和过度劳累，保护精气');
@@ -257,19 +257,19 @@ const Advice = {
     getDietAdvice: function(constitution, zhuQi, stzq) {
         let advice = '';
         
-        if (constitution.constitution.organ === '肝') {
+        if (constitution.organ === '肝') {
             advice += '宜食绿色蔬菜、枸杞、山楂；';
         }
-        if (constitution.constitution.organ === '心') {
+        if (constitution.organ === '心') {
             advice += '宜食红色食物如红枣、红豆、西红柿；';
         }
-        if (constitution.constitution.organ === '脾') {
+        if (constitution.organ === '脾') {
             advice += '宜食黄色食物如小米、南瓜、山药；';
         }
-        if (constitution.constitution.organ === '肺') {
+        if (constitution.organ === '肺') {
             advice += '宜食白色食物如百合、银耳、梨；';
         }
-        if (constitution.constitution.organ === '肾') {
+        if (constitution.organ === '肾') {
             advice += '宜食黑色食物如黑豆、黑芝麻、核桃；';
         }
         
