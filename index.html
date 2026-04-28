@@ -393,6 +393,13 @@ footer {
                         <h3 style="color:#c0392b;">❤️ 情志调摄</h3>
                         <div id="emotionInfo"></div>
                     </div>
+
+                    <div class="section-divider"></div>
+
+                    <div class="info-full" style="background:#f5f0ff;border-radius:12px;padding:20px;border-left:4px solid #6b5b95;">
+                        <h3 style="color:#6b5b95;">🔮 V2.1 深化分析</h3>
+                        <div id="v21Info" class="info-content"></div>
+                    </div>
                 </div>
             </section>
         </main>
@@ -778,6 +785,8 @@ const AdviceV2 = {
 };
 
 </script>
+
+    <script src="./js/enhancements-v21.js?v=21"></script>
 
 <script>
 const Lunar = {
@@ -1583,6 +1592,75 @@ document.addEventListener('DOMContentLoaded', function() {
             ? '<ul>' + advice.lifestyle.map(l => '<li>' + l + '</li>').join('') + '</ul>'
             : '<p>保持规律作息</p>';
         document.getElementById('lifestyleInfo').innerHTML = lifestyleHtml;
+        
+        // V2.1 深化分析
+        if (typeof WuYunV21 !== 'undefined' && birthGZ && currentGZ && qiInfo) {
+            try {
+                const v21Result = WuYunV21.analyzeV21(
+                    currentGZ.year.gan + currentGZ.year.zhi,
+                    constitution,
+                    {
+                        zhuQi: qiInfo.zhuQi,
+                        keQi: qiInfo.keQi,
+                        siTian: stzq ? stzq.siTian : null,
+                        keZhuRelation: keZhuAnalysis,
+                        solarTerm: solarTerm && solarTerm.current ? solarTerm.current.name : null
+                    }
+                );
+                
+                if (v21Result && v21Result.modules && v21Result.modules.length > 0) {
+                    let v21Html = '<div style="display:grid;grid-template-columns:1fr;gap:16px;">';
+                    
+                    for (const mod of v21Result.modules) {
+                        v21Html += `<div style="background:#faf8ff;border-radius:10px;padding:16px;border-left:3px solid #6b5b95;">`;
+                        v21Html += `<h4 style="color:#6b5b95;margin-bottom:10px;font-size:0.95rem;">${mod.name}</h4>`;
+                        
+                        if (mod.code === 'T' && mod.data) {
+                            for (const wx of mod.data) {
+                                v21Html += `<p style="margin:6px 0;font-size:0.85rem;"><strong>${wx.organ}</strong>(${wx.condition})：宜${wx.shouldUse}味（${wx.shouldUseFood.join('、')}），忌${wx.shouldAvoid}味</p>`;
+                            }
+                        } else if (mod.code === 'U' && mod.data) {
+                            v21Html += `<p style="margin:6px 0;font-size:0.85rem;">主气${mod.data.zhuQi.qiName}：${mod.data.zhuQi.congHua} → ${mod.data.zhuQi.result}</p>`;
+                            v21Html += `<p style="margin:6px 0;font-size:0.85rem;">客气${mod.data.keQi.qiName}：${mod.data.keQi.congHua} → ${mod.data.keQi.result}</p>`;
+                            v21Html += `<p style="margin:6px 0;font-size:0.85rem;color:#888;">${mod.data.compoundNature}</p>`;
+                        } else if (mod.code === 'V' && mod.data) {
+                            v21Html += `<p style="margin:6px 0;font-size:0.85rem;"><strong>客气胜：</strong>${mod.data.keSheng.symptoms.slice(0,4).join('、')}...</p>`;
+                            v21Html += `<p style="margin:6px 0;font-size:0.85rem;"><strong>主气胜：</strong>${mod.data.zhuSheng.symptoms.slice(0,4).join('、')}...</p>`;
+                            if (mod.data.dominant) {
+                                v21Html += `<p style="margin:6px 0;font-size:0.85rem;color:#b85450;">${mod.data.dominant} · ${mod.data.advice}</p>`;
+                            }
+                        } else if (mod.code === 'W' && mod.data) {
+                            v21Html += `<p style="margin:6px 0;font-size:0.85rem;">上治${mod.data.therapy.shang.taste}（${mod.data.therapy.shang.target}）</p>`;
+                            v21Html += `<p style="margin:6px 0;font-size:0.85rem;">中治${mod.data.therapy.zhong.taste}（${mod.data.therapy.zhong.target}）</p>`;
+                            v21Html += `<p style="margin:6px 0;font-size:0.85rem;">下治${mod.data.therapy.xia.taste}（${mod.data.therapy.xia.target}）</p>`;
+                        } else if (mod.code === 'X' && mod.data) {
+                            v21Html += `<p style="margin:6px 0;font-size:0.85rem;"><strong>${mod.data.name}</strong> · 风险等级：${mod.data.riskLevel}</p>`;
+                            v21Html += `<p style="margin:6px 0;font-size:0.85rem;">预警信号：${mod.data.warningSigns.slice(0,3).join('、')}...</p>`;
+                            v21Html += `<p style="margin:6px 0;font-size:0.85rem;color:#888;">${mod.data.advice}</p>`;
+                        } else if (mod.code === 'Y' && mod.data) {
+                            v21Html += `<p style="margin:6px 0;font-size:0.85rem;">本年${mod.data.yearType}，气至${mod.data.timing}</p>`;
+                            v21Html += `<p style="margin:6px 0;font-size:0.85rem;color:#888;">${mod.data.adjustment}</p>`;
+                        } else if (mod.code === 'Z' && mod.data) {
+                            const layers = mod.data.layers.filter(l => l.level !== '正常');
+                            for (const layer of layers) {
+                                v21Html += `<p style="margin:4px 0;font-size:0.85rem;">${layer.level} · ${layer.name}：${layer.symptoms.slice(0,3).join('、')}...</p>`;
+                            }
+                        } else if (mod.code === 'AA' && mod.data) {
+                            v21Html += `<p style="margin:6px 0;font-size:0.85rem;">${mod.data.year}年${mod.data.hua}，灾宫在${mod.data.direction}方（${mod.data.gong}宫）</p>`;
+                            v21Html += `<p style="margin:6px 0;font-size:0.85rem;color:#888;">${mod.data.meaning}</p>`;
+                        }
+                        
+                        v21Html += '</div>';
+                    }
+                    
+                    v21Html += '</div>';
+                    document.getElementById('v21Info').innerHTML = v21Html;
+                }
+            } catch (e) {
+                console.error('V2.1分析出错:', e);
+                document.getElementById('v21Info').innerHTML = '<p style="color:#888;font-size:0.85rem;">V2.1分析模块加载中...</p>';
+            }
+        }
     }
 });
     </script>
