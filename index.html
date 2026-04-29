@@ -910,7 +910,7 @@ const Lunar = {
         const dayZhiIndex = (diffDays % 12 + 12) % 12;
         
         let hourZhiIndex = 0;
-        if (hour !== null && hour !== undefined && hour !== '') {
+        if (hour !== null && hour !== undefined && hour !== '' && !isNaN(parseInt(hour))) {
             hourZhiIndex = Math.floor((parseInt(hour) + 1) % 12);
         }
         const hourGanStart = (dayGanIndex % 5) * 2;
