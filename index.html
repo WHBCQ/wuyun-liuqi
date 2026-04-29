@@ -1596,9 +1596,11 @@ document.addEventListener('DOMContentLoaded', function() {
         // V2.1 深化分析
         if (typeof WuYunV21 !== 'undefined' && birthGZ && currentGZ && qiInfo) {
             try {
+                // 重新获取 constitution（解决作用域问题）
+                const v21Constitution = WuYunLiuQi.analyzeConstitution(birthGZ.year.gan);
                 const v21Result = WuYunV21.analyzeV21(
                     currentGZ.year.gan + currentGZ.year.zhi,
-                    constitution,
+                    v21Constitution,
                     {
                         zhuQi: qiInfo.zhuQi,
                         keQi: qiInfo.keQi,
