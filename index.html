@@ -786,7 +786,7 @@ const AdviceV2 = {
 
 </script>
 
-    <script src="./js/enhancements-v21.js?v=21"></script>
+    <script src="./js/enhancements-v21.js?v=21_20260429"></script>
 
 <script>
 const Lunar = {
@@ -1594,10 +1594,12 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('lifestyleInfo').innerHTML = lifestyleHtml;
         
         // V2.1 深化分析
+        console.log('[时候] V2.1 displayResults 触发检查: WuYunV21存在?', typeof WuYunV21 !== 'undefined', 'birthGZ?', !!birthGZ, 'currentGZ?', !!currentGZ, 'qiInfo?', !!qiInfo);
         if (typeof WuYunV21 !== 'undefined' && birthGZ && currentGZ && qiInfo) {
             try {
                 // 重新获取 constitution（解决作用域问题）
                 const v21Constitution = WuYunLiuQi.analyzeConstitution(birthGZ.year.gan);
+                console.log('[时候] V2.1 constitution:', v21Constitution);
                 const v21Result = WuYunV21.analyzeV21(
                     currentGZ.year.gan + currentGZ.year.zhi,
                     v21Constitution,
@@ -1660,7 +1662,7 @@ document.addEventListener('DOMContentLoaded', function() {
                 }
             } catch (e) {
                 console.error('V2.1分析出错:', e);
-                document.getElementById('v21Info').innerHTML = '<p style="color:#888;font-size:0.85rem;">V2.1分析模块加载中...</p>';
+                document.getElementById('v21Info').innerHTML = '<p style="color:#c0392b;font-size:0.85rem;">V2.1分析出错: ' + e.message + '</p>';
             }
         }
     }
